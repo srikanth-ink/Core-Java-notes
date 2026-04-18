@@ -1,5 +1,3 @@
-// still needed to be upated!
-
 /*
 
 Reverse Integer
@@ -22,24 +20,21 @@ public class ReverseInteger {
     Scanner sc = new Scanner(System.in);
     int n = sc.nextInt();
 
-    if (n < -231 || n > 232) {
-      System.out.println(0);
-    } else {
-      int temp = Math.abs(n);
-      int rem = 0;
-      int res = 0;
+    int res = 0;
 
-      while (temp > 0) {
-        rem = (temp % 10);
-        res = (res * 10) + rem;
-        temp = temp / 10;
-      }
-      if (n < 0) {
-        System.out.println(-res);
-      } else {
-        System.out.println(res);
+    while (n != 0) {
+      int rem = n % 10;
+      n = n / 10;
+
+      // Check overflow BEFORE updating res
+      if (res > Integer.MAX_VALUE / 10 || res < Integer.MIN_VALUE / 10) {
+        System.out.println(0);
+        return;
       }
 
+      res = res * 10 + rem;
     }
+
+    System.out.println(res);
   }
 }
